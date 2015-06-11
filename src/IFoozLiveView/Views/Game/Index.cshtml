@@ -4,10 +4,22 @@
 <div class="game-container">
 
     <div class="score">
-        <span class="team-blue">Blå</span>
-        <span>@Html.DisplayFor(m => m.BlueScore) - @Html.DisplayFor(m => m.WhiteScore)</span>
-        <span class="team-white">Hvit</span>
+        <span class="players-names team-blue">
+            @foreach (var player in Model.TeamBlue)
+            {
+                <i class="fa fa-user"></i> @Html.DisplayFor(m => player.Name)
+            }
+        </span>        
+        <span class="score-numbers">@Html.DisplayFor(m => m.BlueScore) - @Html.DisplayFor(m => m.WhiteScore)</span>
+        <span class="players-names team-white">
+            @foreach (var player in Model.TeamWhite)
+            {
+                <i class="fa fa-user"></i> @Html.DisplayFor(m => player.Name)
+            }
+        </span>
     </div>
+   
+   
     <hr/>
     <div class="goals-list">
         @foreach (var goal in Model.Goals)
