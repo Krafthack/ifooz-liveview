@@ -188,3 +188,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+
+# Files copied by gulp
+wwwroot/css/
+wwwroot/lib/
