@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='less, watch' Clean='clean' ProjectOpened='watch' />
+﻿/// <binding BeforeBuild='less' Clean='clean' ProjectOpened='watch' />
 
 var gulp = require("gulp"),
   rimraf = require("rimraf"),
@@ -44,6 +44,7 @@ var less = require('gulp-less');
 gulp.task('less', function () {
     return gulp.src(paths.stylesheets)
       .pipe(less())
+      .on('error', swallowError)
       .pipe(gulp.dest(destPaths.stylesheets));
 });
 
@@ -53,3 +54,11 @@ gulp.task('watch', function() {
     gulp.watch(paths.stylesheets, ['less']);
 });
 
+
+
+function swallowError(error) {
+
+    console.log(error.toString());
+
+    this.emit('end');
+}

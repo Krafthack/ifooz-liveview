@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IFoozLiveView.Composition;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Hosting;
@@ -31,8 +32,12 @@ namespace IFoozLiveView
         {
             services.Configure<AppSettings>(Configuration.GetSubKey("AppSettings"));
 
+
             // Add MVC services to the services container.
             services.AddMvc();
+
+            CompositionBuilder.RegisterDependencies(services);
+
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
@@ -58,7 +63,7 @@ namespace IFoozLiveView
             {
                 // Add Error handling middleware which catches all application specific errors and
                 // send the request to the following path or controller action.
-                app.UseErrorHandler("/Home/Error");
+                app.UseErrorHandler("/Error");
             }
 
             // Add static files to the request pipeline.
@@ -69,7 +74,7 @@ namespace IFoozLiveView
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Game}/{action=Index}/{id?}");
 
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");

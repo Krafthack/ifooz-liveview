@@ -6,15 +6,9 @@ using Microsoft.AspNet.Mvc;
 
 namespace IFoozLiveView.Controllers
 {
-    public class HomeController : Controller
+    public class ErrorController : Controller
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-
-
-        public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");
         }

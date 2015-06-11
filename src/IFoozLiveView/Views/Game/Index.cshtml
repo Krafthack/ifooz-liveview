@@ -1,0 +1,19 @@
+﻿@model IFoozLiveView.Models.GameState
+
+
+<div class="game-container">
+
+    <div class="score">
+        <span class="team-blue">Blå</span>
+        <span>@Html.DisplayFor(m => m.BlueScore) - @Html.DisplayFor(m => m.WhiteScore)</span>
+        <span class="team-white">Hvit</span>
+    </div>
+    <hr/>
+    <div class="goals-list">
+        @foreach (var goal in Model.Goals)
+        {
+            <p><i class="fa fa-soccer-ball-o"></i>&nbsp;@Html.DisplayFor(m => goal.Timestamp) @Html.DisplayFor(m => m.GetPlayer(goal.PlayerId).Name)</p>
+        }
+    </div>
+
+</div>
