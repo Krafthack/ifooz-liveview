@@ -12,6 +12,7 @@ namespace IFoozLiveView.Composition
         public static void RegisterDependencies(IServiceCollection services)
         {
             services.AddTransient<IGameStateService, GameStateTestData>();
+            services.AddTransient<IGameHub, GameHub>();
 
         }
     }

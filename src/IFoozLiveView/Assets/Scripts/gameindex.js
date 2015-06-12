@@ -29,7 +29,6 @@ gameindex.startClock = function (time) {
 
 
 // Draw
-
 gameindex.drawGamestate = function (retrieveGameStateUrl) {
 
     function drawPlayers(players, selector) {
@@ -66,7 +65,7 @@ gameindex.drawGamestate = function (retrieveGameStateUrl) {
                 '<i class="fa fa-soccer-ball-o"></i>&nbsp;' + getMinute(goal) +
                 "&apos;</span>" +
                 '<span class="player-name team-' + goal.Team.toLowerCase() + '">' +
-                goal.Team +
+                '<i class="fa fa-user"' +
                 '</span>' +
                 '</p>'
             );
@@ -74,7 +73,7 @@ gameindex.drawGamestate = function (retrieveGameStateUrl) {
     }
 
 
-
+    // Retreive data
     $.getJSON(retrieveGameStateUrl, function (data) {
 
         drawPlayers(data.Blue.Players, '#blue-players');
