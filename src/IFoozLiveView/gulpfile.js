@@ -9,14 +9,18 @@ eval("var project = " + fs.readFileSync("./project.json"));
 var paths = {
     root: "./" + project.webroot,
     bower: "./bower_components/",
-    stylesheets: "./Assets/Stylesheets/*.less"
+    stylesheets: "./Assets/Stylesheets/*.less",
+    scripts: "./Assets/Scripts/*.js"
 };
 
 var destPaths = {
     lib: paths.root + "/lib/",
-    stylesheets: paths.root + "/css/"
+    stylesheets: paths.root + "/css/",
+    scripts: paths.root + "/scripts/"
 }
 
+
+// Libraries
 gulp.task("clean", function (cb) {
     rimraf(destPaths.lib, cb);
 });
@@ -38,6 +42,19 @@ gulp.task("copy", ["clean"], function () {
 });
 
 
+// js
+var uglify = require('gulp-uglify');
+
+gulp.task('js', function () {
+    return gulp.src(paths.scripts)
+//      .pipe(uglify())
+      .pipe(gulp.dest(destPaths.scripts));
+});
+
+
+
+
+
 //  Less  
 var less = require('gulp-less');
 
@@ -52,10 +69,13 @@ gulp.task('less', function () {
 // Watch
 gulp.task('watch', function() {
     gulp.watch(paths.stylesheets, ['less']);
+    gulp.watch(paths.scripts, ['js']);
 });
 
 
 
+
+// Helper
 function swallowError(error) {
 
     console.log(error.toString());

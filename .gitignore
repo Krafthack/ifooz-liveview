@@ -193,3 +193,4 @@ ModelManifest.xml
 # Files copied by gulp
 src/IFoozLiveView/wwwroot/css/
 src/IFoozLiveView/wwwroot/lib/
+src/IFoozLiveView/wwwroot/scripts/

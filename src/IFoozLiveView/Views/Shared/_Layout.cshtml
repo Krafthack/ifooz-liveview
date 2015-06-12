@@ -9,14 +9,15 @@
               type="image/icon"
               href="favicon.ico">
             <link rel="stylesheet" href="~/css/site.css" />
-            <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.css"/>
+        <script src="~/lib/jquery/jquery.js" ></script>
+
     </head>
     <body>
     <div class="container body-content">
         @RenderBody()
     </div>
 
-            <script src="~/lib/jquery/jquery.js"></script>
             <script src="~/lib/hammer.js/hammer.js"></script>
     
         @RenderSection("scripts", required: false)

@@ -5,27 +5,43 @@
 
     <div class="score">
         <span class="players-names team-blue">
-            @foreach (var player in Model.TeamBlue)
+            @foreach (var player in Model.BluePlayers)
             {
-                <i class="fa fa-user"></i> @Html.DisplayFor(m => player.Name)
+                <i class="fa fa-user"></i>
+                @Html.DisplayFor(m => player.Name)
             }
-        </span>        
+        </span>
         <span class="score-numbers">@Html.DisplayFor(m => m.BlueScore) - @Html.DisplayFor(m => m.WhiteScore)</span>
         <span class="players-names team-white">
-            @foreach (var player in Model.TeamWhite)
+            @foreach (var player in Model.WhitePlayers)
             {
-                <i class="fa fa-user"></i> @Html.DisplayFor(m => player.Name)
+                <i class="fa fa-user"></i>
+                @Html.DisplayFor(m => player.Name)
             }
         </span>
     </div>
-   
-   
-    <hr/>
+    <div id="clock">@Html.DisplayFor(m => m.Clock)</div>
+
+
+    <hr />
     <div class="goals-list">
         @foreach (var goal in Model.Goals)
         {
-            <p><i class="fa fa-soccer-ball-o"></i>&nbsp;@Html.DisplayFor(m => goal.Timestamp) @Html.DisplayFor(m => m.GetPlayer(goal.PlayerId).Name)</p>
+            <p>
+                <span class="goal-info">
+                    <i class="fa fa-soccer-ball-o"></i>&nbsp;@goal.TimeSince(Model.StartTime)
+                </span>
+                <span class="player-name team-@goal.TeamName">
+                    @Html.DisplayFor(m => goal.Player.Name)
+                </span>
+            </p>
         }
     </div>
 
 </div>
+
+
+@section Scripts
+{
+    <script src="~/scripts/gameindex.js"></script>
+}
