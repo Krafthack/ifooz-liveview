@@ -9,43 +9,37 @@ namespace IFoozLiveView.Models
 {
     public class GameState
     {
-        public IEnumerable<Player> Players { get; set; }
+
+        public Team Blue { get; set; }
+        public Team White { get; set; }
+
         public DateTime StartTime { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:mm\\:ss}")]
         public TimeSpan Clock => DateTime.Now - StartTime;
 
 
-        public IEnumerable<Goal> Goals => Players.SelectMany(p => p.Goals).OrderByDescending(g => g.Timestamp);
+        public IEnumerable<Goal> Goals =>  Blue.Goals.Concat(White.Goals).OrderByDescending(g => g.Timestamp);
 
-        public IEnumerable<Player> BluePlayers => Players.Where(p => p.Team == Team.Blue);
-        public IEnumerable<Player> WhitePlayers => Players.Where(p => p.Team == Team.White);
-        
-        public int BlueScore => BluePlayers.SelectMany(p => p.Goals).Count();
-        public int WhiteScore => WhitePlayers.SelectMany(p => p.Goals).Count();
-
+     
 
         public GameState()
         {
             
         }
 
-        public GameState(IEnumerable<Player> players, DateTime startTime)
+        public GameState(Team white, Team blue, DateTime startTime)
         {
             StartTime = startTime;
-            Players = players;
-            SetPlayerOnGoals();
+            Blue = blue;
+            White = white;
         }
 
-        public void SetPlayerOnGoals()
+
+        public void SetTeamOnGoals()
         {
-            foreach (var player in Players)
-            {
-                foreach (var goal in player.Goals)
-                {
-                    goal.SetPlayer(player);
-                }
-            }
+            Blue.SetTeamOnGoals();
+            White.SetTeamOnGoals();
         }
     }
 }

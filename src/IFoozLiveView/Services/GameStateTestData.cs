@@ -9,14 +9,22 @@ namespace IFoozLiveView.Services
     {
         public GameState RetrieveCurrent()
         {
+            var rnd = new Random();
             var players = CreatePlayers("Ken", "Eivind", "Calle", "Frode");
 
-            return new GameState( players, DateTime.Now.AddSeconds(-350));
+            var blue = new Team {Players = players.Take(2), Name = TeamNames.Blue, Goals = CreateGoals(rnd)};
+            var white = new Team {Players = players.Skip(2), Name = TeamNames.White, Goals = CreateGoals(rnd) };
+
+
+            var gamestate =  new GameState(white, blue, DateTime.Now.AddSeconds(-350));
+            gamestate.SetTeamOnGoals();
+
+            return gamestate;
 
         }
 
        
-        private List<Goal> CreateGoals(Player player, Random rnd)
+        private List<Goal> CreateGoals(Random rnd)
         {
             var result = new List<Goal>();
 
@@ -28,7 +36,6 @@ namespace IFoozLiveView.Services
 
                 result.Add(new Goal()
                 {
-                    PlayerId = player.Id,
                     Timestamp = timestamp
                 });
 
@@ -49,10 +56,7 @@ namespace IFoozLiveView.Services
                 {
                     Id = i,
                     Name = players[i],
-                    Team = i < 2 ? Team.Blue : Team.White,
-
                 };
-                player.Goals = CreateGoals(player, rnd);
                 result.Add(player);
             }
             return result;

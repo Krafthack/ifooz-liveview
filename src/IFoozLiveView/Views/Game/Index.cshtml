@@ -1,41 +1,19 @@
-﻿@model IFoozLiveView.Models.GameState
-
-
-<div class="game-container">
+﻿<div class="game-container">
 
     <div class="score">
-        <span class="players-names team-blue">
-            @foreach (var player in Model.BluePlayers)
-            {
-                <i class="fa fa-user"></i>
-                @Html.DisplayFor(m => player.Name)
-            }
+        <span id ="blue-players" class="players-names team-blue">
+           
         </span>
-        <span class="score-numbers">@Html.DisplayFor(m => m.BlueScore) - @Html.DisplayFor(m => m.WhiteScore)</span>
-        <span class="players-names team-white">
-            @foreach (var player in Model.WhitePlayers)
-            {
-                <i class="fa fa-user"></i>
-                @Html.DisplayFor(m => player.Name)
-            }
+        <span id="score" class="score-numbers"></span>
+        <span id ="white-players" class="players-names team-white">
         </span>
     </div>
-    <div id="clock">@Html.DisplayFor(m => m.Clock)</div>
+    <div id="clock"></div>
 
 
     <hr />
     <div class="goals-list">
-        @foreach (var goal in Model.Goals)
-        {
-            <p>
-                <span class="goal-info">
-                    <i class="fa fa-soccer-ball-o"></i>&nbsp;@goal.TimeSince(Model.StartTime)
-                </span>
-                <span class="player-name team-@goal.TeamName">
-                    @Html.DisplayFor(m => goal.Player.Name)
-                </span>
-            </p>
-        }
+        
     </div>
 
 </div>
@@ -44,4 +22,9 @@
 @section Scripts
 {
     <script src="~/scripts/gameindex.js"></script>
+    <script>
+        var url = '@Url.Action("RetrieveGameState")';
+        gameindex.drawGamestate(url);
+
+    </script>
 }

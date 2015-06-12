@@ -7,25 +7,31 @@ namespace IFoozLiveView.Controllers
 {
     public class GameController : Controller
     {
+        [FromServices]
         public IGameStateService GameStateService { get; set; }
 
+        [FromServices]
+        public IGameHub GameHub { get; set; }
 
-        public GameController(IGameStateService srv)
-        {
-            GameStateService = srv;
-        }
 
         public IActionResult Index()
         {
-            var gamestate = GameStateService.RetrieveCurrent();
-
-            return View(gamestate);
+            return View();
         }
 
+        public JsonResult RetrieveGameState()
+        {
+
+            var gameState = GameStateService.RetrieveCurrent();
+
+
+            return Json(gameState);
+        }
 
         public void PublishGameState(GameState game)
         {
-            
+            game.SetTeamOnGoals();
+            GameHub.Publish(game);
         }
     }
 }

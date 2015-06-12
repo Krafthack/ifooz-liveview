@@ -5,17 +5,10 @@ namespace IFoozLiveView.Models
 {
     public class Goal
     {
-        public int PlayerId { get; set; }
         [DisplayFormat(DataFormatString = "{0:HH:mm:ss}" )]
         public DateTime Timestamp { get; set; }
 
-        public Player Player { get; private set; }
-        public string TeamName => Player.Team.ToString().ToLower();
-
-        public void SetPlayer(Player player)
-        {
-            Player = player;
-        }
+        public string Team { get; set; }
 
         public string TimeSince(DateTime startTime)
         {
