@@ -17,7 +17,6 @@ namespace IFoozLiveView.Services
 
 
             var gamestate =  new GameState(white, blue, DateTime.Now.AddSeconds(-350));
-            gamestate.SetTeamOnGoals();
 
             return gamestate;
 

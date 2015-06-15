@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='less' Clean='clean' ProjectOpened='watch' />
+﻿/// <binding BeforeBuild='less, js' Clean='clean' ProjectOpened='watch' />
 
 var gulp = require("gulp"),
   rimraf = require("rimraf"),
@@ -22,6 +22,8 @@ var destPaths = {
 
 // Libraries
 gulp.task("clean", function (cb) {
+    rimraf(destPaths.scripts, function () { });
+    rimraf(destPaths.stylesheets, function () { });
     rimraf(destPaths.lib, cb);
 });
 
