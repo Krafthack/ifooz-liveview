@@ -29,7 +29,8 @@ namespace IFoozLiveView.Controllers
             return Json(gameState);
         }
 
-        public void PublishGameState(GameState game)
+        [HttpPost]
+        public void Publish(GameState game)
         {
             game.SetTeamOnGoals();
 
