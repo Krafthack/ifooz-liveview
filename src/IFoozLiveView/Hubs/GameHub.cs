@@ -6,7 +6,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 namespace IFoozLiveView.Services
 {
     [HubName("game")]
-    public class ChatHub : Hub
+    public class GameHub : Hub
     {
       
     }

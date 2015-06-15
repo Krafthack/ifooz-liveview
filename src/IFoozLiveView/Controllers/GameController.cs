@@ -35,7 +35,7 @@ namespace IFoozLiveView.Controllers
         {
             game.SetTeamOnGoals();
 
-            var gameHub = ConnectionManager.GetHubContext<ChatHub>();
+            var gameHub = ConnectionManager.GetHubContext<GameHub>();
             gameHub.Clients.All.publish(game);
         }
 
@@ -45,7 +45,7 @@ namespace IFoozLiveView.Controllers
             var gameState = GameStateService.RetrieveCurrent();
             gameState.SetTeamOnGoals();
 
-            var gameHub = ConnectionManager.GetHubContext<ChatHub>();
+            var gameHub = ConnectionManager.GetHubContext<GameHub>();
             gameHub.Clients.All.publish(gameState);
         }
         
