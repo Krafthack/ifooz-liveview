@@ -21,10 +21,26 @@
 
 @section Scripts
 {
-    <script src="~/scripts/gameindex.js"></script>
+    <script src="~/lib/signalr/jquery.signalR.min.js"></script>
+    <script src="~/signalr/js"></script>
+    <script src="~/scripts/game.js"></script>
     <script>
-        var url = '@Url.Action("RetrieveGameState")';
-        gameindex.drawGamestate(url);
+            var url = '@Url.Action("RetrieveGameState")';
+            game.retrieveAndDrawGameState(url);
+
+
+
+        $(function () {
+            var gameHub = $.connection.game;
+
+            gameHub.client.publish = function (gameState) {
+                game.drawGameState(gameState);
+
+            };
+            
+            $.connection.hub.start();
+        });
+
 
     </script>
 }

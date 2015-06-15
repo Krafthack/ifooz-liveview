@@ -27,11 +27,12 @@ gulp.task("clean", function (cb) {
 
 gulp.task("copy", ["clean"], function () {
     var bower = {
-        "hammer.js": "hammer.js/hammer*.{js,map}",
-        "jquery": "jquery/jquery*.{js,map}",
-        "jquery-validation": "jquery-validation/jquery.validate.js",
-        "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-        "fontawesome": "/fontawesome/*/**.{css,otf,eot,svg,ttf,woff,woff2}"
+        "hammer.js": "hammer.js/hammer*.{min.js,map}",
+        "jquery": "jquery/jquery*.{min.js,map}",
+        "jquery-validation": "jquery-validation/jquery.validate.min.js",
+        "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+        "fontawesome": "/fontawesome/*/**.{css,otf,eot,svg,ttf,woff,woff2}",
+        "signalr": "signalr/*.min.js"
 
     }
 

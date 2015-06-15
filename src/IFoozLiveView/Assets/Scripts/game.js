@@ -1,8 +1,8 @@
 ﻿
-var gameindex = gameindex || {};
+var game = game || {};
 
 // Updates the game timer
-gameindex.startClock = function (time) {
+game.startClock = function (time) {
 
     var clockArray = time.split(':');
 
@@ -20,18 +20,34 @@ gameindex.startClock = function (time) {
         $('#clock').html(checkTime(m) + ":" + checkTime(s));
 
         clock.setSeconds(s + 1);
-        setTimeout(function () { printTime() }, 1000);
+        game.clockCounter = setTimeout(function () { printTime() }, 1000);
     }
-
 
     printTime();
 }
 
+game.stopClock = function () {
+    clearTimeout(game.clockCounter);
+};
+
 
 // Draw
-gameindex.drawGamestate = function (retrieveGameStateUrl) {
+game.retrieveAndDrawGameState = function(retrieveGameStateUrl) {
+
+
+    $.getJSON(retrieveGameStateUrl, function (gameState) {
+        game.drawGameState(gameState);
+    });
+}
+
+
+game.drawGameState = function (gameState) {
+
+
 
     function drawPlayers(players, selector) {
+
+        $(selector).html("");
         players.forEach(function (player) {
             $(selector).append(' <i class="fa fa-user"></i>' + player.Name);
         });
@@ -46,7 +62,7 @@ gameindex.drawGamestate = function (retrieveGameStateUrl) {
     function drawGoals(gamestate, selector) {
 
         var element = $(selector);
-
+        element.html("");
 
         function getMinute(goal) {
 
@@ -70,19 +86,19 @@ gameindex.drawGamestate = function (retrieveGameStateUrl) {
                 '</p>'
             );
         });
+
+       
     }
+    
+    drawPlayers(gameState.Blue.Players, '#blue-players');
+    drawPlayers(gameState.White.Players, '#white-players');
+    drawScore(gameState, "#score");
+    drawGoals(gameState, ".goals-list");
+
+    game.stopClock();
+    game.startClock(gameState.Clock);
 
 
-    // Retreive data
-    $.getJSON(retrieveGameStateUrl, function (data) {
-
-        drawPlayers(data.Blue.Players, '#blue-players');
-        drawPlayers(data.White.Players, '#white-players');
-        drawScore(data, "#score");
-        drawGoals(data, ".goals-list");
-
-        gameindex.startClock(data.Clock);
-
-    });
+   
 
 }

@@ -2,6 +2,8 @@
 using IFoozLiveView.Models;
 using IFoozLiveView.Services;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace IFoozLiveView.Controllers
 {
@@ -9,9 +11,8 @@ namespace IFoozLiveView.Controllers
     {
         [FromServices]
         public IGameStateService GameStateService { get; set; }
-
         [FromServices]
-        public IGameHub GameHub { get; set; }
+        public IConnectionManager ConnectionManager { get; set; }
 
 
         public IActionResult Index()
@@ -31,7 +32,19 @@ namespace IFoozLiveView.Controllers
         public void PublishGameState(GameState game)
         {
             game.SetTeamOnGoals();
-            GameHub.Publish(game);
+
+            var gameHub = ConnectionManager.GetHubContext<ChatHub>();
+            gameHub.Clients.All.publish(game);
         }
+
+        public void PublishTest()
+        {
+
+            var gameState = GameStateService.RetrieveCurrent();
+
+            var gameHub = ConnectionManager.GetHubContext<ChatHub>();
+            gameHub.Clients.All.publish(gameState);
+        }
+        
     }
 }
