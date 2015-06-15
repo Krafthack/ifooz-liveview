@@ -32,7 +32,7 @@ game.stopClock = function () {
 
 
 // Draw
-game.retrieveAndDrawGameState = function(retrieveGameStateUrl) {
+game.retrieveAndDrawGameState = function (retrieveGameStateUrl) {
 
 
     $.getJSON(retrieveGameStateUrl, function (gameState) {
@@ -87,18 +87,54 @@ game.drawGameState = function (gameState) {
             );
         });
 
-       
     }
-    
+
+    function drawGameStart(gameState, selector) {
+
+        $(selector).html(gameState.StartTimeFriendly);
+    }
+
+    function drawWinner(gameState, selector) {
+        
+
+        function insertWinner(winner, selector) {
+
+            var element = $(selector);
+
+            element.addClass();
+
+            element.html(
+                "<i class='fa fa-trophy team-" + winner.toLowerCase()+ "'></i>");
+        }
+
+
+        if (gameState.Blue.Score >= gameState.ScoreLimit) {
+            insertWinner(gameState.Blue.Name, selector);
+            game.stopClock();
+
+        }
+        else if (gameState.White.Score >= gameState.ScoreLimit) {
+            insertWinner(gameState.White.Name, selector);
+            game.stopClock();
+        }
+
+    }
+
     drawPlayers(gameState.Blue.Players, '#blue-players');
     drawPlayers(gameState.White.Players, '#white-players');
     drawScore(gameState, "#score");
     drawGoals(gameState, ".goals-list");
+    drawGameStart(gameState, "#game-start");
 
     game.stopClock();
     game.startClock(gameState.Clock);
 
+    drawWinner(gameState, "#winner");
 
-   
+
+
+
 
 }
+
+

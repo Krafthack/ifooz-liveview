@@ -28,7 +28,7 @@ namespace IFoozLiveView.Services
         {
             var result = new List<Goal>();
 
-            var count = rnd.Next(0, 5);
+            var count = rnd.Next(0, 9);
 
             for (int i = 0; i < count; i++)
             {
@@ -47,7 +47,6 @@ namespace IFoozLiveView.Services
 
         private List<Player> CreatePlayers(params string[] players)
         {
-            var rnd = new Random();
             var result = new List<Player>();
 
             for (int i = 0; i < players.Length; i++)

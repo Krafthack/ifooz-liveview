@@ -1,5 +1,11 @@
 ﻿<div class="game-container">
-
+       <div id="winner">
+       
+    </div>
+    <div class="game-info">
+        <i class="fa fa-caret-square-o-right" title="Kampstart"></i>&nbsp;
+        <span id="game-start"></span>
+    </div>
     <div class="score">
         <span id ="blue-players" class="players-names team-blue">
            
@@ -9,12 +15,11 @@
         </span>
     </div>
     <div id="clock"></div>
-
-
-    <hr />
+    <hr/>
     <div class="goals-list">
-        
+
     </div>
+
 
 </div>
 
@@ -25,11 +30,12 @@
     <script src="~/signalr/js"></script>
     <script src="~/scripts/game.js"></script>
     <script>
-            var url = '@Url.Action("RetrieveGameState")';
-            game.retrieveAndDrawGameState(url);
+        // Draw game
+        var url = '@Url.Action("RetrieveGameState")';
+        game.retrieveAndDrawGameState(url);
 
 
-
+        // Set up socket
         $(function () {
             var gameHub = $.connection.game;
 
@@ -40,7 +46,6 @@
             
             $.connection.hub.start();
         });
-
 
     </script>
 }

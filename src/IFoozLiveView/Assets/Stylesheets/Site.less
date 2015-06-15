@@ -22,11 +22,24 @@ body {
         border: 1px;
         box-shadow: rgba(0,0,0,0.3) 1px 1px 2px;
         padding: 1em;
-
+        position: relative;
 
         .score {
             font-size: 135%;
             word-spacing: 0.7em;
+
+            @media (max-width: 720px) {
+                font-size: 100%;
+                word-spacing: 0.2em;
+            }
+
+            @media (max-width: 490px) {
+                font-size: 70%;
+                word-spacing: 0;
+            }
+             @media (max-width: 350px) {
+                    font-size: 50%;
+                }
 
             span {
                 text-shadow: rgba(0,0,0,0.3) 1px 1px 5px;
@@ -38,6 +51,11 @@ body {
 
             .score-numbers {
                 font-size: 250%;
+
+                @media (max-width: 500px) {
+                    font-size: 180%;
+                }
+                
             }
 
             i {
@@ -56,13 +74,57 @@ body {
 
         .goals-list {
             .player-name {
-                position:absolute;
+                position: absolute;
             }
+
             .team-blue {
-                left: 46%;
+                left: 42%;
+                  @media (max-width: 490px) {
+                               left: 33%;
+
             }
+            }
+
             .team-white {
-                right: 46%;
+                right: 42%;
+                  @media (max-width: 490px) {
+                                right: 33%;
+
+            }
+            }
+        }
+
+        .game-info {
+            text-align: left;
+            font-size: 75%;
+            color: gray;
+        }
+
+        #winner {
+            position: relative;
+
+            i {
+                font-size: 200px;
+                  @media (max-width: 720px) {
+                font-size: 150px;
+            }     @media (max-width: 490px) {
+                font-size: 75px;
+            }
+
+
+                position: absolute;
+                margin: auto;
+                left: 0;
+                right: 0;
+                top: 200px;
+
+                &.team-blue {
+                    right: 60%;
+                }
+
+                &.team-white {
+                    left: 60%;
+                }
             }
         }
     }
