@@ -4,6 +4,7 @@ POST:
 /game/publish
 
 Example Json:
+```json
 
 {
   "Blue": {
@@ -47,3 +48,4 @@ Example Json:
   },
   "StartTime": "2015-06-15T11:38:42.2744558+02:00"
 }
+```
