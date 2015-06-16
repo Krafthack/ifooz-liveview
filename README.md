@@ -3,10 +3,10 @@
 POST:
 /game/publish
 
-Example Json:
+Example usage:
 ```json
 
-{
+var obj = {
   "Blue": {
     "Players": [
       {
@@ -36,4 +36,12 @@ Example Json:
   },
   "StartTime": "2015-06-15T11:38:42.2744558+02:00"
 }
+
+$.ajax({
+  type: "POST",
+  url: "game/publish",
+  data: JSON.stringify(obj),
+  contentType: "application/json",
+  dataType: "json" 
+});
 ```
