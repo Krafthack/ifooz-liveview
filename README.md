@@ -4,7 +4,7 @@ POST:
 /game/publish
 
 Example usage:
-```json
+`
 
 var obj = {
   "Blue": {
@@ -44,4 +44,4 @@ $.ajax({
   contentType: "application/json",
   dataType: "json" 
 });
-```
+`
