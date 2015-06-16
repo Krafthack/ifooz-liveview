@@ -10,13 +10,15 @@ namespace IFoozLiveView.Services
         public GameState RetrieveCurrent()
         {
             var rnd = new Random();
-            var players = CreatePlayers("Ken", "Eivind", "Calle", "Frode");
+//            var players = CreatePlayers("Ken", "Eivind", "Calle", "Frode");
+            var players = new List<Player>();
 
-            var blue = new Team {Players = players.Take(2), Name = TeamNames.Blue, Goals = CreateGoals(rnd)};
-            var white = new Team {Players = players.Skip(2), Name = TeamNames.White, Goals = CreateGoals(rnd) };
+            var blue = new Team {Players = players.Take(2), Goals = CreateGoals(rnd)};
+            var white = new Team {Players = players.Skip(2), Goals = CreateGoals(rnd) };
 
 
-            var gamestate =  new GameState(white, blue, DateTime.Now.AddSeconds(-350));
+//            var gamestate =  new GameState(white, blue, DateTime.Now.AddSeconds(-350));
+            var gamestate =  new GameState(white, blue, DateTime.Now);
 
             return gamestate;
 
@@ -26,6 +28,8 @@ namespace IFoozLiveView.Services
         private List<Goal> CreateGoals(Random rnd)
         {
             var result = new List<Goal>();
+
+            return result;
 
             var count = rnd.Next(0, 9);
 

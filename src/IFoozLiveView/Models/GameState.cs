@@ -36,13 +36,14 @@ namespace IFoozLiveView.Models
             Blue = blue;
             White = white;
             ScoreLimit = scoreLimit;
+            SetTeamNames();
         }
 
 
-        public void SetTeamOnGoals()
+        public void SetTeamNames()
         {
-            Blue.SetTeamOnGoals();
-            White.SetTeamOnGoals();
+            Blue.SetTeamName(TeamNames.Blue);
+            White.SetTeamName(TeamNames.White);
         }
     }
 }

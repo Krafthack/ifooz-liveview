@@ -4,6 +4,7 @@ using IFoozLiveView.Services;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
+using Microsoft.Net.Http.Server;
 using Newtonsoft.Json.Linq;
 
 namespace IFoozLiveView.Controllers
@@ -25,15 +26,15 @@ namespace IFoozLiveView.Controllers
         {
 
             var gameState = GameStateService.RetrieveCurrent();
-            gameState.SetTeamOnGoals();
+            gameState.SetTeamNames();
 
             return Json(gameState);
         }
 
         [HttpPost]
-        public void Publish(GameState game)
+        public void Publish([FromBody] GameState game)
         {
-            game.SetTeamOnGoals();
+            game.SetTeamNames();
 
             var gameHub = ConnectionManager.GetHubContext<GameHub>();
             gameHub.Clients.All.publish(game);
@@ -43,7 +44,7 @@ namespace IFoozLiveView.Controllers
         {
 
             var gameState = GameStateService.RetrieveCurrent();
-            gameState.SetTeamOnGoals();
+            gameState.SetTeamNames();
 
             var gameHub = ConnectionManager.GetHubContext<GameHub>();
             gameHub.Clients.All.publish(gameState);

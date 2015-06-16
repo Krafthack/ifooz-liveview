@@ -77,7 +77,8 @@ namespace IFoozLiveViewTests
 
         public Team CreateTeam(IEnumerable<Player> players, List<Goal> goals, string teamName)
         {
-            var blue = new Team { Players = players, Name = teamName, Goals = goals };
+            var blue = new Team { Players = players, Goals = goals };
+            blue.SetTeamName(teamName);
             return blue;
         }
     }
