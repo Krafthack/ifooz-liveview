@@ -9,7 +9,7 @@ namespace IFoozLiveView.Models
         public IEnumerable<Goal> Goals { get; set; }
         public string Name { get; private set; }
         
-        public int Score => Goals.Count();
+        public virtual int Score => Goals.Count();
 
 
         public void SetTeamName(string name)

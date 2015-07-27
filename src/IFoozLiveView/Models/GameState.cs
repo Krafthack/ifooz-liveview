@@ -10,9 +10,12 @@ namespace IFoozLiveView.Models
     public class GameState
     {
         
+        [Required]
         public Team Blue { get; set; }
+        [Required]
         public Team White { get; set; }
 
+        [Required]
         public DateTime StartTime { get; set; }
         public string StartTimeFriendly => StartTime.ToString("dd. MMM HH:mm");
 
@@ -20,7 +23,9 @@ namespace IFoozLiveView.Models
         public TimeSpan Clock => DateTime.Now - StartTime;
 
 
-        public IEnumerable<Goal> Goals =>  Blue.Goals.Concat(White.Goals).OrderByDescending(g => g.Timestamp);
+        private IEnumerable<Goal> BlueGoals => Blue != null ? Blue.Goals : new List<Goal>();
+        private IEnumerable<Goal> WhiteGoals => White != null ? White.Goals : new List<Goal>();
+        public IEnumerable<Goal> Goals =>  BlueGoals.Concat(WhiteGoals).OrderByDescending(g => g.Timestamp);
 
         public int? ScoreLimit { get; set; }
         private const int DefaultScoreLimit = 10;
